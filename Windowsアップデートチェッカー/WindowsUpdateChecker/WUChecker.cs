@@ -55,6 +55,10 @@ public class Form1 : Form
         // ツールを終了するまで監視し続ける
         while (true)
         {
+            // 1時間おきにチェック
+            const int time = 3600 * 1000;
+            Thread.Sleep(time);
+
             const string BASE = @"SOFTWARE\Microsoft\Windows\CurrentVersion";
 
             bool RebootPending = existsKey(BASE + @"\Component Based Servicing\RebootPending");
@@ -66,8 +70,7 @@ public class Form1 : Form
                 string message = "シャットダウン時に更新が入る可能性があります。\n休憩時間等に再起動をおすすめします。";
                 notify(title, message);
             }
-            const int time = 3600 * 1000;
-            Thread.Sleep(time);
+
         }
     }
 
